@@ -2378,7 +2378,7 @@ function showFormError(msg){
 
 
 
-/* ── Performance: pause canvas when tab is hidden ── */
+/* ── Performance: pause canvas when tab is hidden── */
 document.addEventListener('visibilitychange', () => {
   document.querySelectorAll('canvas').forEach(c => {
     c.style.opacity = document.hidden ? '0' : '';
