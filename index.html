@@ -341,32 +341,37 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.4)}
 
 .orbit-node{
   position:absolute;z-index:5;pointer-events:none;
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  /* JS will set top/left */
+  display:flex;flex-direction:column;align-items:center;gap:6px;
 }
 .on-icon{
-  width:50px;height:50px;border-radius:14px;
+  width:48px;height:48px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;
-  backdrop-filter:blur(14px);
-  transition:transform .3s;
+  backdrop-filter:blur(16px);
+  transition:transform .35s cubic-bezier(.22,.68,0,1.2),box-shadow .35s;
+  position:relative;
+}
+/* Subtle inner shine */
+.on-icon::after{
+  content:'';position:absolute;inset:0;border-radius:12px;
+  background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 60%);
+  pointer-events:none;
 }
 .on-label{
-  font-family:var(--ff-mono);font-size:.58rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;
-  padding:3px 10px;border-radius:6px;
-  backdrop-filter:blur(8px);
+  font-family:var(--ff-mono);font-size:.56rem;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 9px;border-radius:5px;
+  backdrop-filter:blur(10px);
   border:1px solid;white-space:nowrap;
 }
 /* Color variants */
-.orbit-node[data-color="cyan"]  .on-icon{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.45);box-shadow:0 0 18px rgba(0,212,255,.25)}
-.orbit-node[data-color="cyan"]  .on-label{background:rgba(0,212,255,.07);border-color:rgba(0,212,255,.3);color:var(--accent)}
-.orbit-node[data-color="green"] .on-icon{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.45);box-shadow:0 0 18px rgba(16,185,129,.25)}
-.orbit-node[data-color="green"] .on-label{background:rgba(16,185,129,.07);border-color:rgba(16,185,129,.3);color:var(--accent3)}
-.orbit-node[data-color="purple"].on-icon{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.45);box-shadow:0 0 18px rgba(124,58,237,.25)}
-.orbit-node[data-color="purple"].on-label{background:rgba(124,58,237,.07);border-color:rgba(124,58,237,.3);color:#a78bfa}
-.orbit-node[data-color="gold"]  .on-icon{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.45);box-shadow:0 0 18px rgba(245,158,11,.25)}
-.orbit-node[data-color="gold"]  .on-label{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.3);color:var(--gold)}
+.orbit-node[data-color="cyan"]  .on-icon{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.35);box-shadow:0 0 20px rgba(0,212,255,.15),inset 0 1px 0 rgba(0,212,255,.1)}
+.orbit-node[data-color="cyan"]  .on-label{background:rgba(0,212,255,.06);border-color:rgba(0,212,255,.25);color:var(--accent)}
+.orbit-node[data-color="green"] .on-icon{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.35);box-shadow:0 0 20px rgba(16,185,129,.15),inset 0 1px 0 rgba(16,185,129,.1)}
+.orbit-node[data-color="green"] .on-label{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.25);color:var(--accent3)}
+.orbit-node[data-color="purple"].on-icon{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.35);box-shadow:0 0 20px rgba(124,58,237,.15),inset 0 1px 0 rgba(124,58,237,.1)}
+.orbit-node[data-color="purple"].on-label{background:rgba(124,58,237,.06);border-color:rgba(124,58,237,.25);color:#a78bfa}
+.orbit-node[data-color="gold"]  .on-icon{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.35);box-shadow:0 0 20px rgba(245,158,11,.15),inset 0 1px 0 rgba(245,158,11,.1)}
+.orbit-node[data-color="gold"]  .on-label{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.25);color:var(--gold)}
 
 /* Float per index — set via JS */
 
@@ -1198,12 +1203,66 @@ footer{background:var(--bg2);border-top:1px solid var(--border);
     <div class="photo-ring3"></div>
 
     <!-- Orbit nodes — positioned by JS on a perfect circle -->
-    <div class="orbit-node" data-color="cyan">  <div class="on-icon">🧠</div><div class="on-label">Deep Learning</div></div>
-    <div class="orbit-node" data-color="green"> <div class="on-icon">✨</div><div class="on-label">GenAI & LLMs</div></div>
-    <div class="orbit-node" data-color="purple"><div class="on-icon">🔗</div><div class="on-label">RAG · Agents</div></div>
-    <div class="orbit-node" data-color="gold">  <div class="on-icon">☁️</div><div class="on-label">AWS · MLOps</div></div>
-    <div class="orbit-node" data-color="cyan">  <div class="on-icon">📊</div><div class="on-label">Analytics</div></div>
-    <div class="orbit-node" data-color="green"> <div class="on-icon">🤖</div><div class="on-label">ML Engineer</div></div>
+    <!-- Deep Learning -->
+    <div class="orbit-node" data-color="cyan">
+      <div class="on-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+          <circle cx="12" cy="4" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="20" cy="20" r="2"/>
+          <circle cx="12" cy="12" r="3"/>
+          <line x1="12" y1="6" x2="12" y2="9"/><line x1="6" y1="20" x2="9" y2="13"/><line x1="18" y1="20" x2="15" y2="13"/>
+        </svg>
+      </div>
+      <div class="on-label">Deep Learning</div>
+    </div>
+    <!-- GenAI & LLMs -->
+    <div class="orbit-node" data-color="green">
+      <div class="on-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent3)">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="on-label">GenAI & LLMs</div>
+    </div>
+    <!-- RAG · Agents -->
+    <div class="orbit-node" data-color="purple">
+      <div class="on-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:#a78bfa">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+          <path d="M17.5 17.5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0"/>
+          <line x1="10" y1="6.5" x2="14" y2="6.5"/><line x1="6.5" y1="10" x2="6.5" y2="14"/><line x1="10" y1="17.5" x2="15.5" y2="17.5"/>
+        </svg>
+      </div>
+      <div class="on-label">RAG · Agents</div>
+    </div>
+    <!-- AWS · MLOps -->
+    <div class="orbit-node" data-color="gold">
+      <div class="on-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <div class="on-label">AWS · MLOps</div>
+    </div>
+    <!-- Analytics -->
+    <div class="orbit-node" data-color="cyan">
+      <div class="on-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+          <line x1="2" y1="20" x2="22" y2="20"/>
+        </svg>
+      </div>
+      <div class="on-label">Analytics</div>
+    </div>
+    <!-- ML Engineer -->
+    <div class="orbit-node" data-color="green">
+      <div class="on-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent3)">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          <line x1="12" y1="4" x2="12" y2="20" stroke-dasharray="2,2"/>
+        </svg>
+      </div>
+      <div class="on-label">ML Engineer</div>
+    </div>
 
     <!-- Photo frame -->
     <div style="position:relative;z-index:6">
@@ -2378,7 +2437,7 @@ function showFormError(msg){
 
 
 
-/* ── Performance: pause canvas when tab is hidden── */
+/* ── Performance: pause canvas when tab is hidden ── */
 document.addEventListener('visibilitychange', () => {
   document.querySelectorAll('canvas').forEach(c => {
     c.style.opacity = document.hidden ? '0' : '';
